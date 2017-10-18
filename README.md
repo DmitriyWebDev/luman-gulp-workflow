@@ -29,6 +29,11 @@ To compile all of your html/css/js files into final compressed/minified version,
 gulp dist
 ```
 
-also, there's a possobility to send your compressed/minified files to remote server. To do this, you should to set up connection in /_gulpfile/settings.js in `module.exports.remoteConn` object.
+also, there's a possobility to send your compressed/minified files to remote server. To do this, you should to set up connection in ./_gulpfile/settings.js in `module.exports.remoteConn` object.
+To send files on the server, according to adjusted settings in `remoteConn` object, run the following command:
+
+```
+gulp sftp
+```
 
 The source code of your project located in the ./src folder
