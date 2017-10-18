@@ -1,13 +1,13 @@
 @import 'susy';
 
 $susy: (
-    container: 1600px,
-    columns: 12,
-    gutters: 0,
-    global-box-sizing: border-box,
-    debug: (
-        image: show
-    )
+  container: 1600px,
+  columns: 12,
+  gutters: 0,
+  global-box-sizing: border-box,
+  debug: (
+    image: show
+  )
 );
 
 @include border-box-sizing;
