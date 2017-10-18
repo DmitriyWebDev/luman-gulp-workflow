@@ -29,7 +29,7 @@ gulp.task('liveRefresh', ['pugCompile'], () => {
 });
 
 gulp.task('pugCompile', () => {
-  return gulp.src('./src/pug/public/templates/**/*.pug')
+  return gulp.src('./src/pug/public/**/*.pug')
     .pipe(plumber({errorHandler: errorHandlers.onPugError}))
     .pipe(changed('./src/public/templates/', {extension: '.html'}))
     .pipe(pug({
@@ -89,13 +89,8 @@ gulp.task('create_dist_folder', () => {
     .pipe(gulp.dest('./dist/'));
 });
 
-let filesToMove = [
-  './src/public/imgs/**/*.*',
-  './src/public/fonts/**/*.*'
-];
-
 gulp.task('move_dependent_folders', () => {
-  return gulp.src(filesToMove, { base: './src/public/' })
+  return gulp.src(settings.depFolders, { base: './src/public/' })
     .pipe(gulp.dest('./dist/'));
 });
 

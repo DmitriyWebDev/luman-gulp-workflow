@@ -8,3 +8,8 @@ module.exports.remoteConn = {
     pass: 'password',
     path: '/absolute/path/to/remote/folder'
 }
+
+module.exports.depFolders = [
+  './src/public/imgs/**/*.*',
+  './src/public/fonts/**/*.*'
+]
