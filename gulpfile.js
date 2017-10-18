@@ -19,6 +19,7 @@ const gulp = require('gulp'),
   gulpif = require('gulp-if'),
   useref = require('gulp-useref'),
   remove = require('remove'),
+  assetpaths = require('gulp-assetpaths'),
   sftp = require('gulp-sftp'),
   changed = require('gulp-changed'),
   fs = require('fs');
@@ -71,6 +72,10 @@ gulp.task('js', () => {
     .pipe(browserSync.reload({stream:true}));
 });
 
+let pathTransform = () => {
+  console.log('transform path');
+}
+
 // here we're making a final distribution
 // version of the project
 gulp.task('create_dist_folder', () => {
@@ -98,6 +103,13 @@ gulp.task('dist',[
   'create_dist_folder',
   'move_dependent_folders'
 ]);
+
+// this task changes paths in html files
+gulp.task('change-paths', () => {
+  return gulp.src(['./dist/**/*.html'])
+    .pipe(assetpaths(settings.assetpathsSettings))
+    .pipe(gulp.dest('./dist/'));
+});
 
 // here we upload production version
 // of site on the server

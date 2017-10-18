@@ -13,3 +13,11 @@ module.exports.depFolders = [
   './src/public/imgs/**/*.*',
   './src/public/fonts/**/*.*'
 ]
+
+module.exports.assetpathsSettings = {
+  newDomain: '/newDomain/',
+  oldDomain : '/',
+  docRoot : '/',
+  filetypes : ['jpg','jpeg','png','ico','gif','js','css'],
+  templates: true
+}
