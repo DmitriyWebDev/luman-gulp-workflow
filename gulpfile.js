@@ -90,7 +90,10 @@ gulp.task('create_dist_folder', () => {
       searchPath: __dirname + '/src/public/',
     }))
     .pipe(gulpif('**/*.js', uglify()))
-    .pipe(gulpif('**/*.css', cleanCss({compatibility: 'ie8'})))
+    .pipe(gulpif('**/*.css', cleanCss({
+      compatibility: 'ie8',
+      rebase: false
+    })))
     .pipe(gulp.dest('./dist/'));
 });
 

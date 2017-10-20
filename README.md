@@ -1,6 +1,6 @@
 # Luman Gulp-Workflow #
 
-To run the task runner the following software neet to be installed:
+To run the task runner the following software need to be installed:
 - NodeJS
 - NPM
 - bower
@@ -34,6 +34,12 @@ To send files on the server, according to adjusted settings in `remoteConn` obje
 
 ```
 gulp sftp
+```
+
+also, you're able to change root path, for instance `/index.html` in your final html files in such attributes like href, link etc, into something like this `http://yourdomain.com/somefolder/index.html`. To do this, run the following command:
+
+```
+gulp change-paths
 ```
 
 The source code of your project located in the ./src folder
