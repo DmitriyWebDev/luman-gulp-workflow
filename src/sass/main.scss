@@ -1,12 +1,10 @@
-// external modules
 @import 'breakpoint';
-// globals
+@import 'susy';
 @import './globals/susy-settings';
 @import './globals/mixins';
 @import './globals/variables';
 @import './globals/reset';
-// includes
 @import './includes/header';
 @import './includes/footer';
-// templates
 @import './templates/common';
+@import './globals/utilities';

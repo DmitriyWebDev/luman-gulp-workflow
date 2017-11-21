@@ -85,7 +85,7 @@ gulp.task('create_dist_folder', () => {
   } catch (err) {
     console.log('dist folder has been created.');
   }
-  return gulp.src('./src/public/**/*.html')
+  return gulp.src(['src/public/**/*.html', '!src/public/bower_components/**/*.html'])
     .pipe(useref({
       searchPath: __dirname + '/src/public/',
     }))
