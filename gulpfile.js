@@ -21,7 +21,7 @@ const gulp = require('gulp'),
   remove = require('remove'),
   assetpaths = require('gulp-assetpaths'),
   sftp = require('gulp-sftp'),
-  changed = require('gulp-changed'),
+  cache = require('gulp-cached'),
   fs = require('fs');
 
 gulp.task('liveRefresh', ['pugCompile'], () => {
@@ -32,7 +32,7 @@ gulp.task('liveRefresh', ['pugCompile'], () => {
 gulp.task('pugCompile', () => {
   return gulp.src('./src/pug/public/**/*.pug')
     .pipe(plumber({errorHandler: errorHandlers.onPugError}))
-    .pipe(changed('./src/public/templates/', {extension: '.html'}))
+    .pipe(cache('linting'))
     .pipe(pug({
       basedir: './src/pug/include',
       pretty: true
