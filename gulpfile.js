@@ -24,12 +24,17 @@ const gulp = require('gulp'),
   cache = require('gulp-cached'),
   fs = require('fs');
 
-gulp.task('liveRefresh', ['pugCompile'], () => {
+gulp.task('liveRefresh', ['pugCompilePages'], () => {
   return gulp.src('./src/public')
     .pipe(browserSync.reload({stream:true}));
 });
 
-gulp.task('pugCompile', () => {
+gulp.task('liveRefreshAll', ['pugCompileAll'], () => {
+  return gulp.src('./src/public')
+    .pipe(browserSync.reload({stream:true}));
+});
+
+gulp.task('pugCompilePages', () => {
   return gulp.src('./src/pug/public/**/*.pug')
     .pipe(plumber({errorHandler: errorHandlers.onPugError}))
     .pipe(cache('linting'))
@@ -44,7 +49,22 @@ gulp.task('pugCompile', () => {
     .pipe(gulp.dest('./src/public/'));
 });
 
-gulp.task('pug', ['pugCompile', 'liveRefresh']);
+gulp.task('pugCompileAll', () => {
+  return gulp.src('./src/pug/public/**/*.pug')
+    .pipe(plumber({errorHandler: errorHandlers.onPugError}))
+    .pipe(pug({
+      basedir: './src/pug/include',
+      pretty: true
+    }))
+    .pipe(wiredep({
+      directory: './src/public/bower_components/',
+      ignorePath: /^(\/|\.+(?!\/[^\.]))+\.+\/public/
+    }))
+    .pipe(gulp.dest('./src/public/'));
+});
+
+gulp.task('pug', ['pugCompilePages', 'liveRefresh']);
+gulp.task('pugAll', ['pugCompileAll', 'liveRefreshAll']);
 
 gulp.task('sass', () => {
   return gulp.src('./src/sass/*.scss')
@@ -141,7 +161,8 @@ gulp.task('serve', () => {
 
 // what files we're watching for
 gulp.task('watch', () => {
-  gulp.watch('./src/pug/**/*.pug', ['pug']);
+  gulp.watch('./src/pug/public/**/*.pug', ['pug']);
+  gulp.watch('./src/pug/include/**/*.pug', ['pugAll']);
   gulp.watch('./src/sass/**/*.scss', ['sass']);
   gulp.watch('./src/js/*.js', ['js']);
   gulp.watch('./bower.json', ['pug']);
@@ -150,7 +171,7 @@ gulp.task('watch', () => {
 // defalt task when we're using just 'gulp' command
 gulp.task('default',[
   'serve',
-  'pugCompile',
+  'pugCompileAll',
   'sass',
   'js',
   'watch'
